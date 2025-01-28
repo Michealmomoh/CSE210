@@ -13,14 +13,14 @@ public class Scripture
         _words = text.Split(' ').Select(word => new Word(word)).ToList();
     }
 
-    // Display the scripture
+ 
     public void Display()
     {
         Console.WriteLine(_reference.ToString());
         Console.WriteLine(string.Join(" ", _words.Select(word => word.Display())));
     }
 
-    // Hide random words
+
     public void HideRandomWords(int count = 3)
     {
         Random random = new Random();
@@ -34,7 +34,6 @@ public class Scripture
         }
     }
 
-    // Check if all words are hidden
     public bool AreAllWordsHidden()
     {
         return _words.All(word => word.IsHidden());
