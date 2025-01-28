@@ -1,27 +1,31 @@
-
 using System;
+
 class Program
 {
     static void Main(string[] args)
     {
-        Reference scriptureReference = new Reference("Proverbs", "3", "5-6");
-        Scripture scripture = new Scripture(scriptureReference, "Trust in the lord with all thine heart and understanding; in all thy ways acknowledge him, and he shall direct thy paths.");
-        ScriptureMemorizer scriptureMemorizer = new ScriptureMemorizer(scripture);
+    
+        var reference = new ScriptureReference("john", 3, 5, 6);
+        var scripture = new Scripture(reference, "For God so loved the world that he gave his son");
 
-        string userInput = "";
-
-        while (userInput != "quit" && scriptureMemorizer.hasWordsLeft() == true)
+        while (true)
         {
             Console.Clear();
-            Console.WriteLine(string.Format("{0} {1}", scriptureReference.toString(), scriptureMemorizer.toString()));
-            Console.WriteLine();
-            userInput = Console.ReadLine();
-            scriptureMemorizer.removeWordsFromText();
-        }
+            scripture.Display();
 
-        Console.Clear();
-        Console.WriteLine(string.Format("{0} {1}", scriptureReference.toString(), scriptureMemorizer.toString()));
-        Console.WriteLine();
-        Console.WriteLine("Good job!");
+            if (scripture.AreAllWordsHidden())
+            {
+                Console.WriteLine("\nAll words are hidden. Great job!");
+                break;
+            }
+
+            Console.WriteLine("\nPress Enter to hide more words, or type 'quit' to exit.");
+            string input = Console.ReadLine();
+
+            if (input.ToLower() == "quit")
+                break;
+
+            scripture.HideRandomWords();
+        }
     }
 }
